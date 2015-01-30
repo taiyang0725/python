@@ -324,7 +324,6 @@ def check_sort_value(strs, vformat, flog, col):
 
 check_sort_value('656',u'^([1-6](,[1-6])*)$',u'只能出现1-6或者留空，多选用逗号隔开','5')
            
-Creating a new branch is quick AND simple.
 
 
 
