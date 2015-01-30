@@ -308,10 +308,22 @@ otherStyletime == "2013-10-10 23:40:00"
 >>> d2.strftime("%Y-%m-%d %H:%M:%S")
 '2013-08-23 17:11:07'
 '''
+#多选用逗号隔开
+def check_sort_value(strs, vformat, flog, col):  
+    if check_format(strs, vformat, col, flog) and len(strs) > 0:
+        temp_list = strs.split(u',')
+        try:
+            t_list = []
+            t_list.extend(set(temp_list))
+            t_list.sort(cmp=lambda x, y:cmp(int(x), int(y)))
+            if t_list != strs.split(','):
+                error_list.append([unicode(active_filename, 'cp932'), g_image, g_line, col, u'逗号后面必须大于逗号前面',strs])
+        except:
+            pass
 
 
-
-
+#check_sort_value(list[i],u'^([1-6](,[1-6])*)$',u'只能出现1-6或者留空，多选用逗号隔开',getColumn(i))
+           
 
 
 
