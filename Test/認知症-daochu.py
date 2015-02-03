@@ -133,53 +133,54 @@ def processing_data(dict1,dict2):
 def merge_data(lst,lst1):
     lists=[]
     list=[]
-    #print len(lst)
-    #print len(lst1)
+    
+    print len(lst)
+    print len(lst1)
     for i in range(len(lst)):
-        for j in range(len(lst1)):
+        if 4>3:
             lists.extend(lst[i][:6])
             lists.append(u'')
             lists.append(find_point(lst[i][6]))
             lists.extend(lst[i][7:10])
             lists.append(find_point(lst[i][10]))
             lists.extend(insert_one_zero(lst[i][11],3))
-            lists.append(lst1[j][1])#===>w1
+            lists.append(lst1[i][1])#===>w1
             lists.extend(insert_one_zero(lst[i][12],5))
-            lists.append(lst1[j][2])#===>w2
+            lists.append(lst1[i][2])#===>w2
             lists.extend(insert_one_zero(lst[i][13],5))
-            lists.append(lst1[j][3])#===>w3
+            lists.append(lst1[i][3])#===>w3
             lists.extend(insert_one_zero(lst[i][14],3))
-            lists.append(lst1[j][4])#===>w4
+            lists.append(lst1[i][4])#===>w4
             lists.extend(insert_one_zero(lst[i][15],4))
-            lists.extend(lst1[j][5:7])#===>w5-6
+            lists.extend(lst1[i][5:7])#===>w5-6
             lists.append(u'')
             lists.extend(lst[i][16:18])
-            lists.extend(lst1[j][7])#===>w7
+            lists.extend(lst1[i][7])#===>w7
             lists.append(u'')
             lists.append(lst[i][18])
             lists.extend(find_point1(lst[i][19:24]))
-            lists.append(lst1[j][8])#===>w8
+            lists.append(lst1[i][8])#===>w8
             lists.append(u'')
             lists.append(find_point(lst[i][24]))
-            lists.append(lst1[j][9])#===>w9
+            lists.append(lst1[i][9])#===>w9
             lists.extend(insert_one_null(lst[i][25],5))
             lists.extend(insert_one_null(lst[i][26],5))
             lists.extend(insert_one_null(lst[i][27],5))
             lists.extend(insert_one_null(lst[i][28],4))
             lists.append(find_point(lst[i][29]))
             lists.extend(insert_one_zero(lst[i][30],25))
-            lists.append(lst1[j][10])#===>w10
+            lists.append(lst1[i][10])#===>w10
             lists.append(u'')
             lists.extend(find_point1(lst[i][31:35]))
             lists.extend(insert_one_zero(lst[i][35],8))
-            lists.append(lst1[j][11])#===>w11
+            lists.append(lst1[i][11])#===>w11
             lists.append(u'')
             lists.extend(find_point1(lst[i][36:40]))
             lists.append(u'')
             lists.extend(find_point1(lst[i][40:46]))
             lists.extend(insert_one_zero(lst[i][46],8))
             lists.append(find_point(lst[i][47]))
-            lists.append(lst1[j][12])#===>w12
+            lists.append(lst1[i][12])#===>w12
             lists.extend(find_point1(lst[i][48:50]))
             lists.append(u'')
             for j in range(50,61):
@@ -189,17 +190,17 @@ def merge_data(lst,lst1):
             lists.extend(insert_one_null(lst[i][62],5))
             lists.append(u'')
             lists.extend(find_point1(lst[i][63:65]))
-            lists.extend(insert_one_zero(lst[i][65],9))  
-            lists.append(lst1[j][13])#===>w13
+            lists.extend(insert_one_zero(lst[i][65],9))
+            lists.append(lst1[i][13])#===>w13
             lists.extend(find_point1(lst[i][66:68]))
             lists.extend(insert_one_zero(lst[i][68],8))
-            lists.append(lst1[j][14])#===>w14
+            lists.append(lst1[i][14])#===>w14
             lists.extend(find_point1(lst[i][69:71]))
             lists.extend(insert_one_zero(lst[i][71],9))
-            lists.append(lst1[j][15])#===>w15
+            lists.append(lst1[i][15])#===>w15
             lists.append(find_point(lst[i][72]))
             lists.extend(insert_one_zero(lst[i][73],12))
-            lists.append(lst1[j][16])#===>w16
+            lists.append(lst1[i][16])#===>w16
             lists.extend(find_point1(lst[i][74:77]))
             lists.append(u'')
             lists.extend(find_point1(lst[i][77:80]))
