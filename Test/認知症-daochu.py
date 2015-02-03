@@ -21,35 +21,23 @@ def to_unicode( s ):
                 return unicode(s,'cp936')
     return rtn
 #---------------读excel---------------------
-def readExcel(path,w):#com组件读取excel
-    value_w=u''
-    exit_list=[]
+def readExcel(path,lst):#com组件读取excel
+    print len(lst)
     try:
         app=win32com.client.Dispatch('Excel.Application')
         app.Visible=0
         active_filename=os.path.split(path)[1]
         app.Workbooks.Open(path)
-        print path
         workSheet = app.Workbooks[0].Sheets[0]
         rows = workSheet.UsedRange.Rows.Count
         cols = workSheet.UsedRange.Columns.Count
-        print w[0]
-        for r in range(len(w)):
-            for c in range(len(w[r])):
-                value_w=w[r][c]#,16,22,28,32,37,38,42,50,53,99,113,135,182,193,205,219
-                if c in [1,16,22,28,32,37,38,42,50,53,99,113,135,182,193,205,219]:
-                    print r+3,c,value_w
-                    #workSheet.Cells(r+3,c).Value=value_w
-                #for r in [1]:
-                    #print i+3,r,u'=============',value_w
-                    #workSheet.Cells(i+3,r).Value=value_w#写'''
-                        #pass
-                         
-           
         
-    
-            
-            
+        for r in range(len(lst)):
+            #print lst[r]
+            pass
+            #workSheet.Cells(3,r).Value=lst[r]
+                
+                    
     except Exception,msg:
         print unicode('异常','utf8'),msg
     finally:
@@ -139,68 +127,155 @@ def processing_data(dict1,dict2):
                  pass
         if  isExists:
             sList1.append(sList[i])
-            
+       
     return merge_data(sList1,wList1)
-    
+def add_data(lst[i],lst1[j]):
+        lists=[]
+        lists.extend(lst[i][:6])
+        lists.append(u'')
+        lists.append(find_point(lst[i][6]))
+        lists.extend(lst[i][7:10])
+        lists.append(find_point(lst[i][10]))
+        lists.extend(insert_one_zero(lst[i][11],3))
+        lists.append(lst1[j][1])#===>w1
+        lists.extend(insert_one_zero(lst[i][12],5))
+        lists.append(lst1[j][2])#===>w2
+        lists.extend(insert_one_zero(lst[i][13],5))
+        lists.append(lst1[j][3])#===>w3
+        lists.extend(insert_one_zero(lst[i][14],3))
+        lists.append(lst1[j][4])#===>w4
+        lists.extend(insert_one_zero(lst[i][15],4))
+        lists.extend(lst1[j][5:7])#===>w5-6
+        lists.append(u'')
+        lists.extend(lst[i][16:18])
+        lists.extend(lst1[j][7])#===>w7
+        lists.append(u'')
+        lists.append(lst[i][18])
+        lists.extend(find_point1(lst[i][19:24]))
+        lists.append(lst1[j][8])#===>w8
+        lists.append(u'')
+        lists.append(find_point(lst[i][24]))
+        lists.append(lst1[j][9])#===>w9
+        lists.extend(insert_one_null(lst[i][25],5))
+        lists.extend(insert_one_null(lst[i][26],5))
+        lists.extend(insert_one_null(lst[i][27],5))
+        lists.extend(insert_one_null(lst[i][28],4))
+        lists.append(find_point(lst[i][29]))
+        lists.extend(insert_one_zero(lst[i][30],25))
+        lists.append(lst1[j][10])#===>w10
+        lists.append(u'')
+        lists.extend(find_point1(lst[i][31:35]))
+        lists.extend(insert_one_zero(lst[i][35],8))
+        lists.append(lst1[j][11])#===>w11
+        lists.append(u'')
+        lists.extend(find_point1(lst[i][36:40]))
+        lists.append(u'')
+        lists.extend(find_point1(lst[i][40:46]))
+        lists.extend(insert_one_zero(lst[i][46],8))
+        lists.append(find_point(lst[i][47]))
+        lists.append(lst1[j][12])#===>w12
+        lists.extend(find_point1(lst[i][48:50]))
+        lists.append(u'')
+        for j in range(50,61):
+            lists.extend(find_slash(lst[i][j]))
+        lists.extend(insert_one_null(lst[i][61],3))
+        lists.append(u'')
+        lists.extend(insert_one_null(lst[i][62],5))
+        lists.append(u'')
+        lists.extend(find_point1(lst[i][63:65]))
+        lists.extend(insert_one_zero(lst[i][65],9))  
+        lists.append(lst1[j][13])#===>w13
+        lists.extend(find_point1(lst[i][66:68]))
+        lists.extend(insert_one_zero(lst[i][68],8))
+        lists.append(lst1[j][14])#===>w14
+        lists.extend(find_point1(lst[i][69:71]))
+        lists.extend(insert_one_zero(lst[i][71],9))
+        lists.append(lst1[j][15])#===>w15
+        lists.append(find_point(lst[i][72]))
+        lists.extend(insert_one_zero(lst[i][73],12))
+        lists.append(lst1[j][16])#===>w16
+        lists.extend(find_point1(lst[i][74:77]))
+        lists.append(u'')
+        lists.extend(find_point1(lst[i][77:80]))
+        lists.append(u'')
+        return lists
     
 def merge_data(lst,lst1):
-   # print lst1
-    final_list=[]
+    lists=[]
+    list=[]
+    #print len(lst)
+    #print len(lst1)
     for i in range(len(lst)):
-        final_list.extend(lst[i][:6])
-        final_list.append(u'')
-        final_list.append(find_point(lst[i][6]))
-        final_list.extend(lst[i][7:10])
-        final_list.append(find_point(lst[i][10]))
-        continue
-        
-    
-    print final_list
-    
-        
-    
-    
-    
-            
-           
-            
+        for j in range(len(lst1)):
+            lists=add_data(lst[i],lst1[j])
+            break
         
         
    
-            
-         
+    
         
+    return lists
+            
 #-------------------------------------------------------
 def find_point(strs):
     if strs.find('.')==-1:
         return strs
     else:
         return str(99)
+    
+def find_point1(list):
+    for i in range(len(list)):
+        if list[i].find('.')>-1:
+            list[i]=u'99'
+
+    return list
+
 
 
 def find_slash(strs):
-
+    lst=[u'',u'']
     if strs.find('/')==-1:
-        return
+        return lst
+    
     a=strs.split('/')
     if len(a)!=2:
-        return
-    b=a[0]
-    c=a[1]
-    return b,c
+        return lst
     
-def insert_one_zero(strs,length):
+    if a[0]!=u'*' and a[1]!=u'*':
+        return [a[0],a[1]]
+
+    if a[0]==u'*' and a[1]!=u'*':
+        return [u'99',a[1]]
+
+    if a[1]==u'*' and a[0]!=u'*':
+        return [a[0],u'99']
+
+    if a[1]==u'*' and a[0]==u'*':
+        return [u'99',u'99']
+    
+def insert_one_null(strs,length):
     lst=[]
     if len(strs)<length:
         for i in range(length-len(strs)):
             lst.append(u'')
+            
         for i in range(len(strs)):
-            lst.append(strs[i])    
+            lst.append(strs[i])
+
+        for i in range(len(lst)):
+            if lst[i]==u'0':
+               lst[i]=u''
+               
         return lst
     
     if len(strs)==length:
         for i in range(len(strs)):
-            lst.append(strs[i])    
+            lst.append(strs[i])
+
+        for i in range(len(lst)):
+            if lst[i]==u'0':
+               lst[i]=u''
+               
         return lst
     
     if  len(strs)>length:
@@ -208,50 +283,43 @@ def insert_one_zero(strs,length):
             lst.append(u'')
         return lst
    
-def insert_one_zero1(strs,length):
+def insert_one_zero(strs,length):
     lst=[]
-    if strs.find('.')>-1:
-        st=strs.split('.')
-        for i in range(len(st)):
-            if re.findall(u'^[0-9]+$',st[i]):
-                lst.insert(int(st[i]),'1')
+    for i in range(length):
+            lst.append(u'0')
             
+    if strs.find('.')>-1:    
+        st=strs.split('.')   
+        for i in range(len(st)): 
+            try:
+                lst.pop(int(st[i])-1)
+                lst.insert(int(st[i])-1,'1')    
+            except:
+                return lst
+        return lst
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    else:
+        for i in range(len(strs)): 
+            try:
+                lst.pop(int(strs[i])-1)
+                lst.insert(int(strs[i])-1,'1')    
+            except:
+                return lst
+        return lst  
+        
 #-------------------------------------------------------    
 
 def doWork():
     global active_filename
-    w_list=[]
+    lists=[]
     
     cwd=os.getcwd()
     txt_map,txt_map1=read_txt_content(cwd+'/*.txt',u'part-s',0)#返回字典
     if txt_map is None:
         return
     
-    processing_data(txt_map,txt_map1)
-    
+    lists=processing_data(txt_map,txt_map1)
+    print len(lists)
     
     
     path=glob.glob(cwd+'/*.xls')
@@ -259,8 +327,8 @@ def doWork():
 
     for filename in path:
         active_filename=os.path.split(filename)[1]
-        #print filename
-        #readExcel(filename,w_list)
+        
+        #readExcel(filename,lists)
     
         
         
