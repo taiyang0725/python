@@ -29,19 +29,13 @@ def readExcel(path,lst):#com组件读取excel
         active_filename=os.path.split(path)[1]
         app.Workbooks.Open(path)
         workSheet = app.Workbooks[0].Sheets[0]
-        rows = workSheet.UsedRange.Rows.Count
-        cols = workSheet.UsedRange.Columns.Count
-        
         for r in range(len(lst)):
-            #print lst[r]
-            pass
-            #workSheet.Cells(3,r).Value=lst[r]
-                
-                    
+            for c in range(len(lst[r])):
+                workSheet.Cells(r+3,c+1).Value=lst[r][c]
+              
     except Exception,msg:
         print unicode('异常','utf8'),msg
     finally:
-        print '---------------------'
         app.DisplayAlerts=False
         app.ActiveWorkbook.Close(SaveChanges=1)    
         app.Quit()
@@ -80,6 +74,7 @@ def read_txt_content(path,title,length):
             read_txt_list.pop(0)       
             if init_txt_map(rtn_map,read_txt_list,unicode(Txt_filename,'cp932'),length,title) is None:
                 return None
+            
         if Txt_filename==u'-w(37).txt':
             read_txt_list =readTxt(filename)
             read_txt_list.pop(0)       
@@ -127,17 +122,16 @@ def processing_data(dict1,dict2):
                  pass
         if  isExists:
             sList1.append(sList[i])
-       
-    return merge_data(sList1,wList1)
     
+    return merge_data(sList1,wList1)
+
 def merge_data(lst,lst1):
     lists=[]
-    list=[]
-    
-    print len(lst)
-    print len(lst1)
+    dict1={}
+    lists2=[]
     for i in range(len(lst)):
         if 4>3:
+            
             lists.extend(lst[i][:6])
             lists.append(u'')
             lists.append(find_point(lst[i][6]))
@@ -205,12 +199,9 @@ def merge_data(lst,lst1):
             lists.append(u'')
             lists.extend(find_point1(lst[i][77:80]))
             lists.append(u'')
-            break
+            
         
-   
-    
-        
-    return lists
+    return lists,len(lst)
             
 #-------------------------------------------------------
 def find_point(strs):
@@ -308,23 +299,24 @@ def insert_one_zero(strs,length):
 def doWork():
     global active_filename
     lists=[]
+    data_list=[]
+    l=0
     
     cwd=os.getcwd()
     txt_map,txt_map1=read_txt_content(cwd+'/*.txt',u'part-s',0)#返回字典
     if txt_map is None:
         return
     
-    lists=processing_data(txt_map,txt_map1)
-    print len(lists)
-    
-    
+    lists,l=processing_data(txt_map,txt_map1)
+    for i in range(l):
+        data_list.append(lists[(len(lists)*i)/l:(len(lists)*(i+1))/l])
+        
     path=glob.glob(cwd+'/*.xls')
     path.sort()
 
     for filename in path:
         active_filename=os.path.split(filename)[1]
-        
-        #readExcel(filename,lists)
+        readExcel(filename,data_list)
     
         
         
