@@ -131,7 +131,6 @@ def merge_data(lst,lst1):
     lists2=[]
     for i in range(len(lst)):
         if 4>3:
-            
             lists.extend(lst[i][:6])
             lists.append(u'')
             lists.append(find_point(lst[i][6]))
@@ -214,10 +213,7 @@ def find_point1(list):
     for i in range(len(list)):
         if list[i].find('.')>-1:
             list[i]=u'99'
-
     return list
-
-
 
 def find_slash(strs):
     lst=[u'',u'']
