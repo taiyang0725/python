@@ -120,6 +120,7 @@ def processing_data(mapW,mapS,mapBs,mapBw):
    
     bwLists=[]
     lsts=[]
+    lstsh=[]
     
     for key in mapW:
         lst=mapW[key][0]
@@ -154,24 +155,32 @@ def processing_data(mapW,mapS,mapBs,mapBw):
             #print len(bsList[i])
             if bwList[i][0]==bsList[j][0]:
                 bwLists.extend(bsList[j])
-                
+       
         if len(bwLists)==25:
             lsts.append(bwLists)
+        else:
+            lstsh.append(bwLists)
             
-    lsts=sorted(lsts, key=lambda lsts: lsts[0])
-    return merge_data(lsts)
+    lsts=sorted(lsts, key=lambda lsts: lsts[0])     
+    lstsh=sorted(lstsh, key=lambda lstsh: lstsh[0])
+    return merge_data(lsts,lstsh)
     
-def merge_data(lsts):
+def merge_data(lsts,lstsh):
     lists=[]
+    listsh=[]
     
     if 4>3:
         for i in range(len(lsts)):
             lists.append(lsts[i][0])
             lists.extend(lsts[i][1:5])
             lists.extend(lsts[i][5:])
-            
-    #print lists,len(lsts)  
-    return lists,len(lsts)        
+
+        for j in range(len(lstsh)):
+            #print lstsh[j],len(lstsh[j])
+            listsh.extend(lstsh[j])
+            listsh.append('cike')
+        
+    return lists,len(lsts),listsh,len(lstsh)        
        
             
                     
@@ -182,6 +191,10 @@ def doWork():
     lists=[]
     data_list=[]
     l=0
+
+    listsh=[]
+    data_listh=[]
+    lh=0
     
     cwd=os.getcwd()
     mapW,mapS,mapBs,mapBw=read_txt_content(cwd+'/*.txt',u'part-s',0)#返回字典                                    
@@ -197,13 +210,23 @@ def doWork():
                u'', u'\u25a0i7777@ezweb.ne.jp', 'wangan',
     u'141219FA1-0002.jpg', u'73', u'5', u'9', u'2', u'', u'08053125045', u'', 'wangan',==========>s------8
     u'141219FA1-0002.jpg', u'', u'', u'', u'']============> bs---------5
-    '''    
-    lists,l=processing_data(mapW,mapS,mapBs,mapBw)
+    '''
+        
+    lists,l,listsh,lh=processing_data(mapW,mapS,mapBs,mapBw)
+
     for i in range(l):
         data_list.append(lists[(len(lists)*i)/l:(len(lists)*(i+1))/l])
-        
+
+    for i in range(lh):
+        data_listh.append(listsh[(len(listsh)*i)/lh:(len(listsh)*(i+1))/lh])
+
+    data_list.extend(data_listh)
+    data_list=sorted(data_list, key=lambda data_list: data_list[0])
+    
     for c in range(len(data_list)):
-        print '*bw*',data_list[c][:3],'*w*',data_list[c][3:11],'*s*',data_list[c][12:19],'*bs*',data_list[c][20:]
+        print '\n*bw*',data_list[c][:3],'\n*w*',data_list[c][3:11],'\n*s*',data_list[c][12:19],'\n*bs*',data_list[c][20:]
+        #print data_list[c]
+        
         
     path=glob.glob(cwd+'/*.xls')
     path.sort()
